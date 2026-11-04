@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "留白 · 网站使用限制",
+  "description": "为网站设置每日额度、每周禁用时段和日期限制，把时间留给重要的事。",
+  "version": "1.4.1",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "tabs", "alarms", "idle", "declarativeNetRequest"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "留白 · 网站使用限制", "default_popup": "popup.html" },
+  "options_page": "index.html",
+  "content_scripts": [{ "matches": ["http://*/*", "https://*/*"], "js": ["content.js"], "run_at": "document_idle", "all_frames": false }],
+  "web_accessible_resources": [{ "resources": ["blocked.html", "blocked.js", "styles.css"], "matches": ["http://*/*", "https://*/*"] }]
+}

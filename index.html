@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>留白 · 网站使用限制</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="index.html"><span class="brand-icon">◷</span> 留白<span class="brand-en">SPACE</span></a>
+    <div class="workspace-label">我的专注空间</div>
+    <nav><button class="nav-item active" data-view="all"><span>▦</span> 网站规则 <b id="nav-count">0</b></button><button class="nav-item" data-view="quota"><span>◷</span> 每日额度</button><button class="nav-item" data-view="schedule"><span>▤</span> 定时限制</button><button class="nav-item" data-view="dates"><span>▦</span> 日期限制</button></nav>
+    <div class="sidebar-note"><span class="leaf">❋</span><strong>少一点分心，多一点留白。</strong><p>把注意力，放回你在意的事。</p></div>
+    <div class="local-note"><span class="status-dot"></span> 数据仅保存在此浏览器</div>
+  </aside>
+  <main>
+    <header><span>你的时间，由你决定</span><span id="today"></span></header>
+    <section class="heading"><div><div class="eyebrow">MAKE ROOM FOR WHAT MATTERS</div><h1>给专注，留一点空间<span>。</span></h1><p>为容易分心的网站设下边界，找回自己的节奏。</p></div><button class="primary" id="add-rule">＋ 添加网站规则</button></section>
+    <section class="stats"><article><span>已设置的规则</span><strong id="stat-total">0<small>条</small></strong><p>每一个边界，都是一次主动选择</p></article><article><span><i class="status-dot"></i> 当前限制中</span><strong id="stat-blocked">0<small>个网站</small></strong><p>为此刻的专注留出空间</p></article><article><span>今日受限网站使用</span><strong id="stat-usage">0<small>分钟</small></strong><p>仅统计每日额度规则的前台浏览</p></article></section>
+    <section class="rule-section"><div class="section-heading"><div><h2>网站规则 <span id="rule-count">0</span></h2><p>规则按本机时间生效，同时匹配网站的子域名。</p></div><label class="global-control"><span id="global-label">限制已开启</span><input id="global-enabled" type="checkbox" role="switch" checked></label></div>
+      <div class="toolbar"><div class="tabs"><button data-filter="all" class="selected">全部规则</button><button data-filter="enabled">已启用</button><button data-filter="disabled">已暂停</button></div><label class="search"><span>⌕</span><input id="search" placeholder="搜索网站或名称" aria-label="搜索网站或名称"></label></div>
+      <div id="rules" class="rules"></div>
+      <div id="empty" class="empty" hidden><div>◌</div><h3>从一个小小的边界开始</h3><p>添加一个容易分心的网站，为今天留出专注时间。</p><button class="secondary" id="empty-add">＋ 添加第一条规则</button></div>
+    </section>
+    <section class="protection-section"><div class="section-heading"><div><h2>修改保护</h2><p id="protection-status">尚未设置保护</p></div><button class="secondary" id="configure-protection">设置保护</button></div><p class="hint">添加网站与开启限制无需验证；修改、删除或关闭限制时，可任选密码或文字挑战，通过一种即可。</p><details class="protection-boundary"><summary>关于防停用与卸载</summary><p>本插件能保护插件内的修改与卸载入口，但浏览器自身的停用、移除按钮不受扩展控制。真正禁止停用或卸载，需要管理员在受管理的浏览器中配置强制安装策略；普通本地加载无法实现。</p><button class="secondary" id="uninstall">验证后申请卸载</button><p class="hint">通过验证后仍会出现浏览器的卸载确认，取消则保留插件。</p></details></section>
+    <footer><span>✧ 不必时刻自律，让规则帮你一点。</span><span>留白 · 专注于此刻</span></footer>
+  </main>
+  <dialog id="editor"><form id="rule-form"><div class="dialog-heading"><div><div class="eyebrow">A LITTLE LESS DISTRACTION</div><h2 id="editor-title">添加网站规则</h2></div><button type="button" class="icon-button" id="close-editor" aria-label="关闭">×</button></div>
+    <label class="field">网站地址<input name="domain" placeholder="例如 bilibili.com 或 https://www.bilibili.com" required maxlength="253"><small>限制整个网站及其子域名，不区分具体页面。</small></label>
+    <label class="field">显示名称 <span class="optional">可选</span><input name="name" placeholder="例如 视频与娱乐" maxlength="40"></label>
+    <label class="field">限制方式<select name="type"><option value="quota">每日额度 · 用满后限制</option><option value="schedule">定时限制 · 指定时段禁用</option><option value="dates">日期限制 · 指定日期禁用</option><option value="always">始终禁用 · 随时保持专注</option></select></label>
+    <div data-panel="quota"><label class="field">每天可使用的分钟数<input type="number" name="minutes" min="1" max="1440" value="30"><small>每天零点重置。只要网页停留在前台就会计时，无需播放视频或操作鼠标；切换应用、标签页或锁屏时暂停。</small></label></div>
+    <div data-panel="schedule" hidden><span class="field-label">重复日期</span><div class="weekdays"><label><input name="days" type="checkbox" value="1" checked><span>一</span></label><label><input name="days" type="checkbox" value="2" checked><span>二</span></label><label><input name="days" type="checkbox" value="3" checked><span>三</span></label><label><input name="days" type="checkbox" value="4" checked><span>四</span></label><label><input name="days" type="checkbox" value="5" checked><span>五</span></label><label><input name="days" type="checkbox" value="6"><span>六</span></label><label><input name="days" type="checkbox" value="0"><span>日</span></label></div><div class="field-row"><label class="field">开始禁用<input type="time" name="start" value="09:00"></label><label class="field">结束禁用<input type="time" name="end" value="18:00"></label></div><p class="hint">结束时间早于开始时间时，自动跨至次日。</p></div>
+    <div data-panel="dates" hidden><div class="field-row"><label class="field">开始日期<input type="date" name="from"></label><label class="field">结束日期<input type="date" name="to"></label></div><p class="hint">包含开始和结束当天，适合备考、假期或短期专注。</p></div>
+    <div data-panel="always" class="hint-box" hidden>规则开启期间，随时限制访问这个网站。</div>
+    <p id="form-error" role="alert" class="error"></p><div class="dialog-footer"><button type="button" class="secondary" id="cancel-editor">取消</button><button type="submit" class="primary" id="save-rule">保存规则</button></div>
+  </form></dialog>
+  <dialog id="protection-editor"><form id="protection-form">
+    <div class="dialog-heading"><h2>设置修改保护</h2><button class="icon-button" type="button" id="close-protection" aria-label="关闭">×</button></div>
+    <label class="check-line"><input type="checkbox" name="protectionEnabled"> 开启修改与关闭保护</label>
+    <div id="password-fields" hidden><label class="field">4 位数字密码<input name="newPassword" type="password" readonly inputmode="none" maxlength="4" autocomplete="off" placeholder="点击下方数字按钮"><small>先点击要填写的密码框，再用数字按钮输入。已有密码时留空可保留。</small></label><label class="field">再次确认 4 位密码<input name="confirmPassword" type="password" readonly inputmode="none" maxlength="4" autocomplete="off" placeholder="点击此框，再用数字按钮确认"></label><div id="setup-pin-pad"></div></div>
+    <p class="hint">设置密码后，每次验证都可以任选密码或文字挑战，通过其中一种即可。未设置密码时仍可使用文字挑战。添加网站规则和开启限制无需验证，修改、删除规则及关闭限制需要验证。</p><p id="protection-error" class="error" role="alert"></p><div class="dialog-footer"><button type="button" class="secondary" id="cancel-protection">取消</button><button type="submit" class="primary" id="save-protection">保存保护设置</button></div>
+  </form></dialog>
+  <div id="toast" role="status" hidden></div><script type="module" src="app.js"></script>
+</body></html>

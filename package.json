@@ -1,0 +1,20 @@
+{
+  "name": "website-restrict",
+  "version": "1.4.1",
+  "description": "留白：按使用时长、每周时段和日期限制网站访问的浏览器扩展",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "files": [
+    "manifest.json", "background.js", "core.js", "protection.js",
+    "content.js", "index.html", "app.js", "styles.css",
+    "guard-ui.js", "pin-input.js", "popup.html", "popup.js",
+    "blocked.html", "blocked.js"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "package": "node scripts/package.mjs"
+  }
+}
